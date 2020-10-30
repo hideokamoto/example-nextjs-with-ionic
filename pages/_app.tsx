@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { ReactText, useEffect } from 'react'
 import { defineCustomElements as ionDefineCustomElements } from '@ionic/core/loader';
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/core/css/core.css';
@@ -23,12 +23,15 @@ import { HTMLAttributes } from 'react'
 type ToReact<T> = {
   [P in keyof T]?: T[P] & Omit<HTMLAttributes<Element>, 'className'> & {
     class?: string;
+    key?: ReactText;
   }
 }
 
 declare global {
   export namespace JSX {
-    interface IntrinsicElements extends ToReact<LocalJSX.IntrinsicElements & IoniconsJSX.IntrinsicElements> {}
+    interface IntrinsicElements extends ToReact<LocalJSX.IntrinsicElements & IoniconsJSX.IntrinsicElements> {
+      key?: string;
+    }
   }
 }
 
